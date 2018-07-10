@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Logging.Serilog
+﻿namespace Infrastructure.Logging.Sample.Host
 {
     public class Service : IService
     {
