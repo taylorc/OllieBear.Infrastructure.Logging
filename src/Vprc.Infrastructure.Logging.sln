@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Tests.Unit", "Infrastructure.Logging.Tests.Unit\Infrastructure.Logging.Tests.Unit.csproj", "{068EE55B-6AE8-43FD-8D0B-C5DD8986019D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging", "Infrastructure.Logging\Infrastructure.Logging.csproj", "{502E1AB6-0C9B-491D-AA40-75CDC8E9E1CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging", "Infrastructure.Logging\Infrastructure.Logging.csproj", "{502E1AB6-0C9B-491D-AA40-75CDC8E9E1CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging.Serilog", "Infrastructure.Logging.Serilog\Infrastructure.Logging.Serilog.csproj", "{9026743E-87AF-4289-A049-90D92954AA5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Serilog", "Infrastructure.Logging.Serilog\Infrastructure.Logging.Serilog.csproj", "{9026743E-87AF-4289-A049-90D92954AA5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging.Serilog.Autofac", "Infrastructure.Logging.Serilog.Autofac\Infrastructure.Logging.Serilog.Autofac.csproj", "{6569A307-62AA-4C7E-8450-C433276952FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Serilog.Autofac", "Infrastructure.Logging.Serilog.Autofac\Infrastructure.Logging.Serilog.Autofac.csproj", "{6569A307-62AA-4C7E-8450-C433276952FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging.Sample.Host", "Infrastructure.Logging.Sample.Host\Infrastructure.Logging.Sample.Host.csproj", "{7D29AD11-EA6C-4C7B-A5F2-4303A3D97431}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Sample.Host", "Infrastructure.Logging.Sample.Host\Infrastructure.Logging.Sample.Host.csproj", "{7D29AD11-EA6C-4C7B-A5F2-4303A3D97431}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Tests.Unit", "Infrastructure.Logging.Tests.Unit\Infrastructure.Logging.Tests.Unit.csproj", "{0603668C-37CD-42E2-A704-53FC457834AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{068EE55B-6AE8-43FD-8D0B-C5DD8986019D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{068EE55B-6AE8-43FD-8D0B-C5DD8986019D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{068EE55B-6AE8-43FD-8D0B-C5DD8986019D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{068EE55B-6AE8-43FD-8D0B-C5DD8986019D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{502E1AB6-0C9B-491D-AA40-75CDC8E9E1CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{502E1AB6-0C9B-491D-AA40-75CDC8E9E1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{502E1AB6-0C9B-491D-AA40-75CDC8E9E1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{7D29AD11-EA6C-4C7B-A5F2-4303A3D97431}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D29AD11-EA6C-4C7B-A5F2-4303A3D97431}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D29AD11-EA6C-4C7B-A5F2-4303A3D97431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0603668C-37CD-42E2-A704-53FC457834AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0603668C-37CD-42E2-A704-53FC457834AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0603668C-37CD-42E2-A704-53FC457834AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0603668C-37CD-42E2-A704-53FC457834AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

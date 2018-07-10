@@ -1,15 +1,13 @@
-﻿using System.IO;
-using Autofac;
+﻿using Autofac;
 using Infrastructure.Logging.Serilog.Autofac;
 using Microsoft.Extensions.Configuration;
-using NUnit.Framework;
+using Xunit;
 
 namespace Infrastructure.Logging.Tests.Unit
 {
-    [TestFixture]
-    internal class AutofacTests
+    public class AutofacTests
     {
-        [Test]
+        [Fact]
         public void Test_Resolve_Default()
         {
             var builder = new ContainerBuilder();
@@ -24,7 +22,7 @@ namespace Infrastructure.Logging.Tests.Unit
 
             var logger = container.Resolve<ILog>();
 
-            Assert.IsNotNull(logger);
+            Assert.NotNull(logger);
         }
     }
 }

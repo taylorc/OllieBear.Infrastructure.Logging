@@ -1,13 +1,12 @@
 ﻿using System;
 using Infrastructure.Logging.Extensions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Infrastructure.Logging.Tests.Unit
 {
-    [TestFixture]
-    internal class ExceptionLoggingTests
+    public class ExceptionLoggingTests
     {
-        [Test]
+        [Fact]
         public void Test_Deep_Exception()
         {
             var firstException = new Exception("Exception (123)");
@@ -18,9 +17,9 @@ namespace Infrastructure.Logging.Tests.Unit
 
             var deepMessage = thirdException.DeepException();
 
-            Assert.IsTrue(deepMessage.Contains("Exception (123)"));
+            Assert.Contains("Exception (123)", deepMessage);
 
-            Assert.IsTrue(deepMessage.Contains("Exception (456)"));
+            Assert.Contains("Exception (456)", deepMessage);
         }
     }
 }
