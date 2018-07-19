@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Logging.Sample.Host
+﻿using Infrastructure.Logging.Interfaces;
+
+namespace Infrastructure.Logging.Sample.Host
 {
     public class Service : IService
     {
