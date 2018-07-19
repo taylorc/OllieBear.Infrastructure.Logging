@@ -6,9 +6,9 @@ namespace Infrastructure.Logging.Serilog.DependencyInjection
     {
         public static IServiceCollection AddSerilogLogging(this IServiceCollection services)
         {
-            services.AddTransient<ILogFactory, LoggerFactory>();
+            services.AddSingleton<ILogFactory, LoggerFactory>();
 
-            services.AddTransient(typeof(ILog), s => s.GetService<ILogFactory>().BuildLog());
+            services.AddSingleton(typeof(ILog), s => s.GetService<ILogFactory>().BuildLog());
 
             return services;
         }
