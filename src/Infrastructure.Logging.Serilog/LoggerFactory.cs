@@ -1,5 +1,4 @@
-﻿using Infrastructure.Logging.Interfaces;
-using Infrastructure.Logging.Utils;
+﻿using Infrastructure.Logging.Utils;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Enrichers;

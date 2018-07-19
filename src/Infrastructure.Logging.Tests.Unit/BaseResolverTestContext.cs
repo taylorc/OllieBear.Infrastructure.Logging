@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Infrastructure.Logging.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;

@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Infrastructure.Logging.Interfaces;
 
 namespace Infrastructure.Logging.Serilog.Autofac
 {

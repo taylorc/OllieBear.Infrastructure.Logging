@@ -1,5 +1,4 @@
-﻿using Infrastructure.Logging.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Logging.Serilog.DependencyInjection
 {

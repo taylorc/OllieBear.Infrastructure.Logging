@@ -1,5 +1,4 @@
-﻿using Infrastructure.Logging.Interfaces;
-using Serilog;
+﻿using Serilog;
 
 namespace Infrastructure.Logging.Serilog
 {

@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure.Logging.Interfaces\Infrastructure.Logging.Interfaces.csproj" />
     <ProjectReference Include="..\Infrastructure.Logging.Serilog\Infrastructure.Logging.Serilog.csproj" />
   </ItemGroup>
 

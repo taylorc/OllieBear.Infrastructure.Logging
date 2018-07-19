@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging.Samp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging.Tests.Unit", "Infrastructure.Logging.Tests.Unit\Infrastructure.Logging.Tests.Unit.csproj", "{0603668C-37CD-42E2-A704-53FC457834AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Interfaces", "Infrastructure.Logging.Interfaces\Infrastructure.Logging.Interfaces.csproj", "{78DCF0D8-C217-493E-900F-A0BDD421F84A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Serilog.DependencyInjection", "Infrastructure.Logging.Serilog.DependencyInjection\Infrastructure.Logging.Serilog.DependencyInjection.csproj", "{10A135F5-EA1A-4D22-AD2D-C0C3DC6A9C1D}"
 EndProject
 Global
@@ -43,10 +41,6 @@ Global
 		{0603668C-37CD-42E2-A704-53FC457834AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0603668C-37CD-42E2-A704-53FC457834AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0603668C-37CD-42E2-A704-53FC457834AE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78DCF0D8-C217-493E-900F-A0BDD421F84A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78DCF0D8-C217-493E-900F-A0BDD421F84A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78DCF0D8-C217-493E-900F-A0BDD421F84A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78DCF0D8-C217-493E-900F-A0BDD421F84A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10A135F5-EA1A-4D22-AD2D-C0C3DC6A9C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10A135F5-EA1A-4D22-AD2D-C0C3DC6A9C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10A135F5-EA1A-4D22-AD2D-C0C3DC6A9C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
