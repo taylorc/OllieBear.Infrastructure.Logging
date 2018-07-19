@@ -1,30 +1,41 @@
-﻿using System.IO;
-using Autofac;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Infrastructure.Logging.Serilog.Autofac;
-using Microsoft.Extensions.Configuration;
-using NUnit.Framework;
+using Xunit;
 
 namespace Infrastructure.Logging.Tests.Unit
 {
-    [TestFixture]
-    internal class AutofacTests
+    public class AutofacTests
     {
-        [Test]
-        public void Test_Resolve_Default()
+        private readonly TestContext _context;
+
+        public AutofacTests()
         {
-            var builder = new ContainerBuilder();
+            _context = new TestContext();
+        }
 
-            var configurationBuilder = new ConfigurationBuilder();
+        [Fact]
+        public void Can_resolve_default_interfaces()
+        {
+            _context.ArrangeContainerConfiguration();
+            _context.ActRegisterAutofacModule();
+            _context.AssertResolved();
+        }
 
-            var configuration = configurationBuilder.Build();
+        private class TestContext : BaseResolverTestContext
+        {
+            public void ActRegisterAutofacModule()
+            {
+                var containerBuilder = new ContainerBuilder();
 
-            builder.RegisterModule(new InfrastructureLoggingIoCModule(configuration));
+                containerBuilder.Populate(Services);
 
-            var container = builder.Build();
+                containerBuilder.RegisterModule<InfrastructureLoggingIoCModule>();
 
-            var logger = container.Resolve<ILog>();
+                var container = containerBuilder.Build();
 
-            Assert.IsNotNull(logger);
+                ServiceProvider = new AutofacServiceProvider(container);
+            }
         }
     }
 }

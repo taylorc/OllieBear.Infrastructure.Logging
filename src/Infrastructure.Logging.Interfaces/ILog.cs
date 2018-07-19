@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Logging
+﻿namespace Infrastructure.Logging.Interfaces
 {
     public interface ILog
     {

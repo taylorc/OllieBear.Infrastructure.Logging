@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Infrastructure.Logging.Utils
 {
-    internal static class SystemDriveUtils
+    public static class SystemDriveUtils
     {
         public static string GetFilePath(string applicationName)
         {
