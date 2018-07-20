@@ -10,23 +10,27 @@ Standardised logging infrastructure module for VPRC projects
 To load the Serilog logging module via Autofac, add the following module to the ContainerBuilder registration:
 ```C#
 var containerBuilder = new ContainerBuilder();
+
 ...
-**builder.RegisterModule<InfrastructureLoggingIoCModule>();**
+
+builder.RegisterModule<InfrastructureLoggingIoCModule>();
 ```
 
 ### DependencyInjection
 
 #### Serilog
 To load the Serilog logging module via DependencyInjection, add the following to the ServicesCollection registration:
-Include the following in the appsettings.json:
 ```C#
 var services = new ServiceCollection();
+
 ...
-**Services.AddSerilogLogging();**
+
+Services.AddSerilogLogging();
 ```
 
 ## Logging Configuration Options
-```xml
+### Sample appsettings.json
+```json
 "LoggingConfigurationOptions": {
     "ApplicationName": "Test.Application",
     "LoggingFileConfiguration": {
