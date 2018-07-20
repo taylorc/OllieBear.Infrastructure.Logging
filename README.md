@@ -1,13 +1,40 @@
 # vprc-infrastructure-logging
 
-Logging module for infrastructure
-This module contains the logging infrastructure package. 
-To load it, simply include the following line in the bootstrapper code:
-```
-builder.RegisterModule<InfrastructureLoggingIoCModule>();
+Standardised logging infrastructure module for VPRC projects
+
+## Implementations
+
+### Autofac
+
+#### Serilog
+To load the Serilog logging module via Autofac, add the following module to the ContainerBuilder registration:
+```C#
+var containerBuilder = new ContainerBuilder();
+...
+**builder.RegisterModule<InfrastructureLoggingIoCModule>();**
 ```
 
+### DependencyInjection
+
+#### Serilog
+To load the Serilog logging module via DependencyInjection, add the following to the ServicesCollection registration:
 Include the following in the appsettings.json:
+```C#
+var services = new ServiceCollection();
+...
+**Services.AddSerilogLogging();**
 ```
-"ApplicationName": "<APPLICATION_NAME>"
+
+## Logging Configuration Options
+```xml
+"LoggingConfigurationOptions": {
+    "ApplicationName": "Test.Application",
+    "LoggingFileConfiguration": {
+      "NumberOfFilesRetained": 10,
+	  "FileSizeLimitBytes": 450000,
+	  "FilePath": "F:\\Logs\\Log01.log",
+	  "Format": "[{Application}],{Level},{Message}"
+    }
+  }
+
 ```
