@@ -42,3 +42,11 @@ Services.AddSerilogLogging();
   }
 
 ```
+
+## Disabling default ASP.NET Core console logging
+You can disable the other configured logging in your projects by adding the following to your Program / Startup code:
+```C#
+	WebHost.CreateDefaultBuilder(args)
+		...
+		.ConfigureLogging(l => l.ClearProviders())
+```
