@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+	<PackageId>Vprc.Infrastructure.Logging.Serilog.DependencyInjection</PackageId>
+    <Authors>HSD</Authors>
+    <Description>Logging IoC Serilog DI module</Description>
+    <Copyright>Copyright © 2018</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
