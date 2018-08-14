@@ -1,12 +1,15 @@
-﻿namespace Infrastructure.Logging
+﻿using System.Collections.Generic;
+using Infrastructure.Logging.Enums;
+
+namespace Infrastructure.Logging
 {
     public class LoggingConfigurationOptions
     {
         public string ApplicationName { get; set; }
+        
+        public string ConsoleMinimumLogLevel { get; set; } = LogLevel.Verbose.ToString();
 
-        public LoggingFileConfiguration LoggingFileConfiguration { get; set; }
-
-        public bool HasFileConfiguration => LoggingFileConfiguration != null;
+        public IEnumerable<LoggingFileConfiguration> LoggingFileConfigurations { get; set; }
     }
 }
          
