@@ -53,6 +53,7 @@ Log level must be one of the following:
 - Warning
 - Error
 - Fatal
+
 Strings other than these entries will throw exceptions.
 ## Multiple Files
 ### Sample appsettings.json
