@@ -1,4 +1,8 @@
-﻿using Infrastructure.Logging.Utils;
+﻿using System;
+using System.Collections.Generic;
+using Infrastructure.Logging.Enums;
+using Infrastructure.Logging.Serilog.Extensions;
+using Infrastructure.Logging.Utils;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Enrichers;
@@ -20,6 +24,9 @@ namespace Infrastructure.Logging.Serilog
 
         public ILog BuildLog()
         {
+            if (!Enum.TryParse(_loggingConfigurationOptions.ConsoleMinimumLogLevel, out LogLevel logLevel))
+                throw new Exception($"Unrecognised log level {_loggingConfigurationOptions.ConsoleMinimumLogLevel}");
+
             _loggerConfiguration
                 .Enrich.With(new ThreadIdEnricher())
                 .Enrich.With(new MachineNameEnricher())
@@ -27,22 +34,28 @@ namespace Infrastructure.Logging.Serilog
                 .Enrich.WithProperty("Application", _loggingConfigurationOptions.ApplicationName)
                 .MinimumLevel.Verbose();
 
-            AddConsoleLogger(_loggerConfiguration);
+            AddConsoleLogger(_loggerConfiguration, logLevel);
 
-            if (_loggingConfigurationOptions.HasFileConfiguration)
+            foreach (var loggileFileConfiguration in 
+                _loggingConfigurationOptions.LoggingFileConfigurations ?? 
+                new LoggingFileConfiguration[] { })
+            {
                 AddRollingFileLogger(
                     _loggerConfiguration,
                     _loggingConfigurationOptions.ApplicationName,
-                    _loggingConfigurationOptions.LoggingFileConfiguration);
+                    loggileFileConfiguration);
+            }
 
             return new Logger(_loggerConfiguration.CreateLogger());
         }
 
-        private static void AddConsoleLogger(LoggerConfiguration loggerConfiguration)
+        private static void AddConsoleLogger(
+            LoggerConfiguration loggerConfiguration,
+            LogLevel minimumLoggingLevel)
         {
             loggerConfiguration
                 .WriteTo
-                .Console();
+                .Console(minimumLoggingLevel.ToLogEventLevel());
         }
 
         private static void AddRollingFileLogger(
@@ -50,13 +63,22 @@ namespace Infrastructure.Logging.Serilog
             string applicationName,
             LoggingFileConfiguration fileConfiguration)
         {
+            if (!Enum.TryParse(fileConfiguration.MinimumLogLevel, out LogLevel logLevel))
+                throw new Exception($"Unrecognised log level {fileConfiguration.MinimumLogLevel}");
+
+            var logFilePath = SystemDriveUtils.GetFilePath(applicationName);
+
+            if (!string.IsNullOrEmpty(fileConfiguration.FilePath))
+                logFilePath = $@"{fileConfiguration.FilePath}\{applicationName}.log";
+
             loggerConfiguration
                 .WriteTo
                 .Sink(new RollingFileSink(
-                    SystemDriveUtils.GetFilePath(applicationName),
+                    logFilePath,
                     new MessageTemplateTextFormatter(fileConfiguration.Format, null),
                     fileConfiguration.FileSizeLimitBytes,
-                    fileConfiguration.NumberOfFilesRetained));
+                    fileConfiguration.NumberOfFilesRetained),
+                    logLevel.ToLogEventLevel());
         }
     }
 }

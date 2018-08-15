@@ -33,14 +33,51 @@ Services.AddSerilogLogging();
 ```json
 "LoggingConfigurationOptions": {
     "ApplicationName": "Test.Application",
-    "LoggingFileConfiguration": {
+    "ConsoleMinimumLogLevel": "Information",
+    "LoggingFileConfigurations": [{
       "NumberOfFilesRetained": 10,
 	  "FileSizeLimitBytes": 450000,
-	  "FilePath": "F:\\Logs\\Log01.log",
-	  "Format": "[{Application}],{Level},{Message}"
-    }
+	  "FilePath": "F:\\Logs\\",
+	  "Format": "[{Application}],{Level},{Message}",
+      "MinimumLogLevel": "Verbose"
+    }]
   }
 
+```
+## Log Levels
+Log level must be one of the following:
+
+- Verbose
+- Debug
+- Information
+- Warning
+- Error
+- Fatal
+
+Strings other than these entries will throw exceptions.
+## Multiple Files
+### Sample appsettings.json
+```json
+{
+  "LoggingConfigurationOptions": {
+    "ApplicationName": "Infrastructure.Logging.Sample.Host",
+    "ConsoleMinimumLogLevel": "Debug",
+    "LoggingFileConfigurations": [
+      {
+        "NumberOfFilesRetained": 15,
+        "MinimumLogLevel": "Information",
+        "FilePath": "D:\\Logs\\SpecificFolder1\\"
+      },
+      {
+        "MinimumLogLevel": "Fatal",
+        "FilePath": "D:\\Logs\\SpecificFolder2"
+      },
+      {
+        "NumberOfFilesRetained": 1
+      }
+    ]
+  }
+}
 ```
 
 ## Disabling default ASP.NET Core console logging

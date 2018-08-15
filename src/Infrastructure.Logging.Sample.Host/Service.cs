@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.Logging.Sample.Host
+﻿using System;
+
+namespace Infrastructure.Logging.Sample.Host
 {
     public class Service : IService
     {
@@ -11,7 +13,14 @@
 
         public void Run()
         {
-            _logger.Info("This is a test log entry");
+            _logger.Verbose("Verbose log entry");
+            _logger.Debug("Debug log entry");
+            _logger.Info("Info log entry");
+            _logger.Warning("Warning log entry");
+            _logger.Error("Error log entry");
+            _logger.Fatal("Fatal log entry");
+
+            Console.ReadKey();
         }
     }
 }

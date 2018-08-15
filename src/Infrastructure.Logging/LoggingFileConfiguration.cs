@@ -1,4 +1,5 @@
-﻿using Infrastructure.Logging.Utils;
+﻿using Infrastructure.Logging.Enums;
+using Infrastructure.Logging.Utils;
 
 namespace Infrastructure.Logging
 {
@@ -11,5 +12,7 @@ namespace Infrastructure.Logging
         public long FileSizeLimitBytes { get; set; } = int.MaxValue;
 
         public int? NumberOfFilesRetained { get; set; } = 14;
+
+        public string MinimumLogLevel { get; set; } = LogLevel.Verbose.ToString();
     }
 }
