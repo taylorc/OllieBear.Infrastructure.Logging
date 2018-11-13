@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Infrastructure.Logging.Enums;
+﻿using Infrastructure.Logging.Enums;
 using Infrastructure.Logging.Serilog.Extensions;
 using Infrastructure.Logging.Utils;
 using Microsoft.Extensions.Options;
@@ -8,6 +6,8 @@ using Serilog;
 using Serilog.Enrichers;
 using Serilog.Formatting.Display;
 using Serilog.Sinks.RollingFile;
+using System;
+using System.IO;
 
 namespace Infrastructure.Logging.Serilog
 {
@@ -25,7 +25,9 @@ namespace Infrastructure.Logging.Serilog
         public ILog BuildLog()
         {
             if (!Enum.TryParse(_loggingConfigurationOptions.ConsoleMinimumLogLevel, out LogLevel logLevel))
+            {
                 throw new Exception($"Unrecognised log level {_loggingConfigurationOptions.ConsoleMinimumLogLevel}");
+            }
 
             _loggerConfiguration
                 .Enrich.With(new ThreadIdEnricher())
@@ -36,8 +38,8 @@ namespace Infrastructure.Logging.Serilog
 
             AddConsoleLogger(_loggerConfiguration, logLevel);
 
-            foreach (var loggileFileConfiguration in 
-                _loggingConfigurationOptions.LoggingFileConfigurations ?? 
+            foreach (var loggileFileConfiguration in
+                _loggingConfigurationOptions.LoggingFileConfigurations ??
                 new LoggingFileConfiguration[] { })
             {
                 AddRollingFileLogger(
@@ -64,12 +66,18 @@ namespace Infrastructure.Logging.Serilog
             LoggingFileConfiguration fileConfiguration)
         {
             if (!Enum.TryParse(fileConfiguration.MinimumLogLevel, out LogLevel logLevel))
+            {
                 throw new Exception($"Unrecognised log level {fileConfiguration.MinimumLogLevel}");
+            }
 
             var logFilePath = SystemDriveUtils.GetFilePath(applicationName);
 
             if (!string.IsNullOrEmpty(fileConfiguration.FilePath))
-                logFilePath = $@"{fileConfiguration.FilePath}\{applicationName}.log";
+            {
+                string logFileName = $"{applicationName}.log";
+
+                logFilePath = Path.Combine(fileConfiguration.FilePath, logFileName);
+            }
 
             loggerConfiguration
                 .WriteTo
@@ -77,8 +85,11 @@ namespace Infrastructure.Logging.Serilog
                     logFilePath,
                     new MessageTemplateTextFormatter(fileConfiguration.Format, null),
                     fileConfiguration.FileSizeLimitBytes,
-                    fileConfiguration.NumberOfFilesRetained),
+                    fileConfiguration.NumberOfFilesRetained,
+                    shared: fileConfiguration.IsMultiProcessShared),
                     logLevel.ToLogEventLevel());
+
+
         }
     }
 }
