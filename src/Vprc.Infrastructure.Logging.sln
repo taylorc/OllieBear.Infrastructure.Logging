@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging.Samp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging.Tests.Unit", "Infrastructure.Logging.Tests.Unit\Infrastructure.Logging.Tests.Unit.csproj", "{0603668C-37CD-42E2-A704-53FC457834AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Serilog.DependencyInjection", "Infrastructure.Logging.Serilog.DependencyInjection\Infrastructure.Logging.Serilog.DependencyInjection.csproj", "{10A135F5-EA1A-4D22-AD2D-C0C3DC6A9C1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging.Serilog.DependencyInjection", "Infrastructure.Logging.Serilog.DependencyInjection\Infrastructure.Logging.Serilog.DependencyInjection.csproj", "{10A135F5-EA1A-4D22-AD2D-C0C3DC6A9C1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Hosting.Extensions", "Infrastructure.Logging.Hosting.Extensions\Infrastructure.Logging.Hosting.Extensions.csproj", "{C11A4B9C-9E20-4371-87D5-9B88B115282F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.Sample.Web.Host", "Infrastructure.Logging.Sample.Web.Host\Infrastructure.Logging.Sample.Web.Host.csproj", "{B705C214-572D-469E-BBB9-2AEDD0DB834F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{10A135F5-EA1A-4D22-AD2D-C0C3DC6A9C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10A135F5-EA1A-4D22-AD2D-C0C3DC6A9C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10A135F5-EA1A-4D22-AD2D-C0C3DC6A9C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11A4B9C-9E20-4371-87D5-9B88B115282F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11A4B9C-9E20-4371-87D5-9B88B115282F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11A4B9C-9E20-4371-87D5-9B88B115282F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11A4B9C-9E20-4371-87D5-9B88B115282F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B705C214-572D-469E-BBB9-2AEDD0DB834F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B705C214-572D-469E-BBB9-2AEDD0DB834F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B705C214-572D-469E-BBB9-2AEDD0DB834F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B705C214-572D-469E-BBB9-2AEDD0DB834F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
