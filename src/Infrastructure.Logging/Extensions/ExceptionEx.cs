@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.Diagnostics;
 
 namespace Infrastructure.Logging.Extensions
 {
@@ -7,15 +7,8 @@ namespace Infrastructure.Logging.Extensions
     {
         public static string DeepException(this Exception exception)
         {
-            var message = new StringBuilder();
-
-            do
-            {
-                message.AppendLine($"-> {exception?.Message}");
-            }
-            while ((exception = exception?.InnerException) != null);
-
-            return message.ToString();
+            // https://github.com/benaadams/Ben.Demystifier
+            return exception.Demystify().ToString();
         }
     }
 }
