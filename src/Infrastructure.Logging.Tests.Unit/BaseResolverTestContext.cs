@@ -1,7 +1,7 @@
-﻿using System;
-using System.IO;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
 using Xunit;
 
 namespace Infrastructure.Logging.Tests.Unit
