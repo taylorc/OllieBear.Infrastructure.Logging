@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Logging.Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.HsdConnect", "Infrastructure.Logging.HsdConnect\Infrastructure.Logging.HsdConnect.csproj", "{B043E7E8-0704-446F-8CA2-905CD051E6F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.HsdConnect.Autofac", "Infrastructure.Logging.HsdConnect.Autofac\Infrastructure.Logging.HsdConnect.Autofac.csproj", "{58897947-5F2F-4091-AD22-9232AF703D2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Logging.HsdConnect.DependencyInjection", "Infrastructure.Logging.HsdConnect.DependencyInjection\Infrastructure.Logging.HsdConnect.DependencyInjection.csproj", "{45652272-1DC1-41EA-9FB4-ACFCE1C7C20D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{B043E7E8-0704-446F-8CA2-905CD051E6F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B043E7E8-0704-446F-8CA2-905CD051E6F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B043E7E8-0704-446F-8CA2-905CD051E6F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58897947-5F2F-4091-AD22-9232AF703D2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58897947-5F2F-4091-AD22-9232AF703D2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58897947-5F2F-4091-AD22-9232AF703D2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58897947-5F2F-4091-AD22-9232AF703D2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45652272-1DC1-41EA-9FB4-ACFCE1C7C20D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45652272-1DC1-41EA-9FB4-ACFCE1C7C20D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45652272-1DC1-41EA-9FB4-ACFCE1C7C20D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45652272-1DC1-41EA-9FB4-ACFCE1C7C20D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
