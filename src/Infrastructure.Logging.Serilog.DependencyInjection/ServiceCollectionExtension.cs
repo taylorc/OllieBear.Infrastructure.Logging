@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Infrastructure.Logging.Serilog.DependencyInjection
 {
@@ -6,9 +7,11 @@ namespace Infrastructure.Logging.Serilog.DependencyInjection
     {
         public static IServiceCollection AddSerilogLogging(this IServiceCollection services)
         {
-            services.AddSingleton<ILogFactory, LoggerFactory>();
+            services.TryAddSingleton<ILog, LogCollection>();
 
-            services.AddSingleton(typeof(ILog), s => s.GetService<ILogFactory>().BuildLog());
+            services.AddSingleton<ISerilogFactory, LoggerFactory>();
+
+            services.AddSingleton(typeof(ILoggerItem), s => s.GetService<ISerilogFactory>().BuildLoggerItem());
 
             return services;
         }

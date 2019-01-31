@@ -6,18 +6,23 @@ namespace Infrastructure.Logging.Serilog.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder
+                .RegisterType<LogCollection>()
+                .AsImplementedInterfaces()
+                .IfNotRegistered(typeof(ILog));
+
             builder.RegisterType<LoggerFactory>()
-                .As<ILogFactory>();
+                .As<ISerilogFactory>();
 
             builder
                 .Register(c =>
                 {
                     var context = c.Resolve<IComponentContext>();
-                    var factory = context.Resolve<ILogFactory>();
+                    var factory = context.Resolve<ISerilogFactory>();
 
-                    return factory.BuildLog();
+                    return factory.BuildLoggerItem();
                 })
-                .As<ILog>()
+                .As<ILoggerItem>()
                 .SingleInstance();
         }
     }

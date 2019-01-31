@@ -11,7 +11,7 @@ using System.IO;
 
 namespace Infrastructure.Logging.Serilog
 {
-    public class LoggerFactory : ILogFactory
+    public class LoggerFactory : ISerilogFactory
     {
         private readonly LoggingConfigurationOptions _loggingConfigurationOptions;
         private readonly LoggerConfiguration _loggerConfiguration;
@@ -22,7 +22,7 @@ namespace Infrastructure.Logging.Serilog
             _loggerConfiguration = new LoggerConfiguration();
         }
 
-        public ILog BuildLog()
+        public ILoggerItem BuildLoggerItem()
         {
             if (!Enum.TryParse(_loggingConfigurationOptions.ConsoleMinimumLogLevel, out LogLevel logLevel))
             {

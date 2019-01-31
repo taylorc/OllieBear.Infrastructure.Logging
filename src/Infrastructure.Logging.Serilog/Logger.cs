@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Logging.Serilog
 {
-    public class Logger : ILog
+    public class Logger : ILoggerItem
     {
         private readonly ILogger _logger;
 
