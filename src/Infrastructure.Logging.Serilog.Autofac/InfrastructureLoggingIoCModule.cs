@@ -11,7 +11,7 @@ namespace Infrastructure.Logging.Serilog.Autofac
                 .AsImplementedInterfaces()
                 .IfNotRegistered(typeof(ILog));
 
-            builder.RegisterType<LoggerFactory>()
+            builder.RegisterType<SerilogFactory>()
                 .As<ISerilogFactory>();
 
             builder

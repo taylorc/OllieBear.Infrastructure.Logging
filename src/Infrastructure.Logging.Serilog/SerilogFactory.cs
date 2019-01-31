@@ -11,12 +11,12 @@ using System.IO;
 
 namespace Infrastructure.Logging.Serilog
 {
-    public class LoggerFactory : ISerilogFactory
+    public class SerilogFactory : ISerilogFactory
     {
         private readonly LoggingConfigurationOptions _loggingConfigurationOptions;
         private readonly LoggerConfiguration _loggerConfiguration;
 
-        public LoggerFactory(IOptions<LoggingConfigurationOptions> loggingConfigurationOptions)
+        public SerilogFactory(IOptions<LoggingConfigurationOptions> loggingConfigurationOptions)
         {
             _loggingConfigurationOptions = loggingConfigurationOptions.Value;
             _loggerConfiguration = new LoggerConfiguration();
@@ -48,7 +48,7 @@ namespace Infrastructure.Logging.Serilog
                     loggileFileConfiguration);
             }
 
-            return new Logger(_loggerConfiguration.CreateLogger());
+            return new SerilogFileLogger(_loggerConfiguration.CreateLogger());
         }
 
         private static void AddConsoleLogger(

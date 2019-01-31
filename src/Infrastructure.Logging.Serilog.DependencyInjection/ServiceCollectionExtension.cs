@@ -9,7 +9,7 @@ namespace Infrastructure.Logging.Serilog.DependencyInjection
         {
             services.TryAddSingleton<ILog, LogCollection>();
 
-            services.AddSingleton<ISerilogFactory, LoggerFactory>();
+            services.AddSingleton<ISerilogFactory, SerilogFactory>();
 
             services.AddSingleton(typeof(ILoggerItem), s => s.GetService<ISerilogFactory>().BuildLoggerItem());
 

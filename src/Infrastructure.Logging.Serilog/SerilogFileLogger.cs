@@ -2,11 +2,11 @@
 
 namespace Infrastructure.Logging.Serilog
 {
-    public class Logger : ILoggerItem
+    public class SerilogFileLogger : ILoggerItem
     {
         private readonly ILogger _logger;
 
-        public Logger(ILogger logger)
+        public SerilogFileLogger(ILogger logger)
         {
             _logger = logger;
         }
