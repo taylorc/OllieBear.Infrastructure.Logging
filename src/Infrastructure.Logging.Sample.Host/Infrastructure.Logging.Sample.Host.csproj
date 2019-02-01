@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Infrastructure.Logging.HsdConnect.Autofac\Infrastructure.Logging.HsdConnect.Autofac.csproj" />
     <ProjectReference Include="..\Infrastructure.Logging.Serilog.Autofac\Infrastructure.Logging.Serilog.Autofac.csproj" />
   </ItemGroup>
 

@@ -9,6 +9,8 @@ namespace Infrastructure.Logging.HsdConnect
 {
     public class HsdConnectFactory : IHsdConnectFactory
     {
+        private const string LogsTable = "Logs";
+
         private readonly LoggingConfigurationOptions _loggingConfigurationOptions;
         private readonly LoggerConfiguration _loggerConfiguration;
 
@@ -21,20 +23,15 @@ namespace Infrastructure.Logging.HsdConnect
         public ILoggerItem BuildLoggerItem()
         {
             _loggerConfiguration
-               /* .Enrich.With(new ThreadIdEnricher())
-                .Enrich.With(new MachineNameEnricher())
-                .Enrich.With(new EnvironmentUserNameEnricher())*/
-                .Enrich.WithProperty("Application", _loggingConfigurationOptions.ApplicationName)
                 .MinimumLevel.Verbose();
 
-            foreach (var loggileFileConfiguration in
-                _loggingConfigurationOptions.LoggingFileConfigurations ??
-                new LoggingFileConfiguration[] { })
+            foreach (var loggingDatabaseConfiguration in
+                _loggingConfigurationOptions.LoggingDatabaseConfigurations ??
+                new LoggingDatabaseConfiguration[] { })
             {
                 AddSqlServerLogger(
                     _loggerConfiguration,
-                    _loggingConfigurationOptions.ApplicationName,
-                    loggileFileConfiguration);
+                    loggingDatabaseConfiguration);
             }
 
             return new HsdConnectLogger(_loggerConfiguration.CreateLogger());
@@ -42,26 +39,19 @@ namespace Infrastructure.Logging.HsdConnect
 
         private static void AddSqlServerLogger(
             LoggerConfiguration loggerConfiguration,
-            string applicationName,
-            LoggingFileConfiguration fileConfiguration)
+            LoggingDatabaseConfiguration databaseConfiguration)
         {
-            if (!Enum.TryParse(fileConfiguration.MinimumLogLevel, out LogLevel logLevel))
+            if (!Enum.TryParse(databaseConfiguration.MinimumLogLevel, out LogLevel logLevel))
             {
-                throw new Exception($"Unrecognised log level {fileConfiguration.MinimumLogLevel}");
+                throw new Exception($"Unrecognised log level {databaseConfiguration.MinimumLogLevel}");
             }
 
             loggerConfiguration
                 .WriteTo
                 .MSSqlServer(
-                    connectionString: "test",
-                    tableName: "test",
-                    columnOptions: BuildColumnOptions(), 
+                    connectionString: databaseConfiguration.ConnectionString,
+                    tableName: LogsTable,
                     restrictedToMinimumLevel: logLevel.ToLogEventLevel());
-        }
-
-        private static ColumnOptions BuildColumnOptions()
-        {
-            return new ColumnOptions();
         }
     }
 }
