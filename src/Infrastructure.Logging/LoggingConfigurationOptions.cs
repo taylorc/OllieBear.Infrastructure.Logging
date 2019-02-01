@@ -10,6 +10,8 @@ namespace Infrastructure.Logging
         public string ConsoleMinimumLogLevel { get; set; } = LogLevel.Verbose.ToString();
 
         public IEnumerable<LoggingFileConfiguration> LoggingFileConfigurations { get; set; }
+
+        public IEnumerable<LoggingDatabaseConfiguration> LoggingDatabaseConfigurations { get; set; }
     }
 }
          

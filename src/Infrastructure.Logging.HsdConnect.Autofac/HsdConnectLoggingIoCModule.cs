@@ -1,8 +1,8 @@
 ﻿using Autofac;
 
-namespace Infrastructure.Logging.Serilog.Autofac
+namespace Infrastructure.Logging.HsdConnect.Autofac
 {
-    public class InfrastructureLoggingIoCModule : Module
+    public class HsdConnectLoggingIoCModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -11,14 +11,14 @@ namespace Infrastructure.Logging.Serilog.Autofac
                 .AsImplementedInterfaces()
                 .IfNotRegistered(typeof(ILog));
 
-            builder.RegisterType<SerilogFactory>()
-                .As<ISerilogFactory>();
+            builder.RegisterType<HsdConnectFactory>()
+                .As<IHsdConnectFactory>();
 
             builder
                 .Register(c =>
                 {
                     var context = c.Resolve<IComponentContext>();
-                    var factory = context.Resolve<ISerilogFactory>();
+                    var factory = context.Resolve<IHsdConnectFactory>();
 
                     return factory.BuildLoggerEntity();
                 })

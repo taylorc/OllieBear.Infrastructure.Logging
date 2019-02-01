@@ -19,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Infrastructure.Logging.HsdConnect.Autofac\Infrastructure.Logging.HsdConnect.Autofac.csproj" />
+    <ProjectReference Include="..\Infrastructure.Logging.HsdConnect.DependencyInjection\Infrastructure.Logging.HsdConnect.DependencyInjection.csproj" />
     <ProjectReference Include="..\Infrastructure.Logging.Serilog.Autofac\Infrastructure.Logging.Serilog.Autofac.csproj" />
     <ProjectReference Include="..\Infrastructure.Logging.Serilog.DependencyInjection\Infrastructure.Logging.Serilog.DependencyInjection.csproj" />
     <ProjectReference Include="..\Infrastructure.Logging\Infrastructure.Logging.csproj" />

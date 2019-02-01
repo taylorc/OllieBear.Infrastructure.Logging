@@ -7,8 +7,17 @@ namespace Infrastructure.Logging.Sample.Web.Host.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILog _logger;
+
+        public HomeController(ILog logger)
+        {
+            _logger = logger;
+        }
+
         public IActionResult Index()
         {
+            _logger.Info("Message Test Inherited Logger");
+
             return View();
         }
 

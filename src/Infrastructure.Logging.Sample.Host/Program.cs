@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Infrastructure.Logging.HsdConnect.Autofac;
 using Infrastructure.Logging.Serilog.Autofac;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,10 +25,12 @@ namespace Infrastructure.Logging.Sample.Host
             services
                 .Configure<LoggingConfigurationOptions>(configuration.GetSection("LoggingConfigurationOptions"));
 
-            containerBuilder.Populate(services);
+            containerBuilder
+                .Populate(services);
 
             containerBuilder
-                .RegisterModule(new InfrastructureLoggingIoCModule());
+                .RegisterModule(new InfrastructureLoggingIoCModule())
+                .RegisterModule(new HsdConnectLoggingIoCModule());
 
             containerBuilder.RegisterType<Service>()
                 .AsImplementedInterfaces();
