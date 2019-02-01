@@ -8,6 +8,11 @@
     <Copyright>Copyright © 2019</Copyright>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure.Logging\Infrastructure.Logging.csproj" />

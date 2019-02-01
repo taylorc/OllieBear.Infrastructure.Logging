@@ -14,6 +14,7 @@ namespace Infrastructure.Logging
         public int? NumberOfFilesRetained { get; set; } = 14;
 
         public string MinimumLogLevel { get; set; } = LogLevel.Verbose.ToString();
+
         public bool IsMultiProcessShared { get; set; }
     }
 }

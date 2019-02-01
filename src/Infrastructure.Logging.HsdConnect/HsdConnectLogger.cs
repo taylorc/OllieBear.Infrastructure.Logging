@@ -1,12 +1,12 @@
 ﻿using Serilog;
 
-namespace Infrastructure.Logging.Serilog
+namespace Infrastructure.Logging.HsdConnect
 {
-    public class SerilogFileLogger : ILoggerItem
+    public class HsdConnectLogger : ILoggerItem
     {
         private readonly ILogger _logger;
 
-        public SerilogFileLogger(ILogger logger)
+        public HsdConnectLogger(ILogger logger)
         {
             _logger = logger;
         }
