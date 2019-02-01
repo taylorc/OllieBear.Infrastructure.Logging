@@ -20,7 +20,7 @@ namespace Infrastructure.Logging.HsdConnect
             _loggerConfiguration = new LoggerConfiguration();
         }
 
-        public ILoggerItem BuildLoggerItem()
+        public ILoggerEntity BuildLoggerEntity()
         {
             _loggerConfiguration
                 .MinimumLevel.Verbose();

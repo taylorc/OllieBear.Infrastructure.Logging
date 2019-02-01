@@ -5,22 +5,22 @@ namespace Infrastructure.Logging
 {
     public class LogCollection : ILog
     {
-        private readonly IEnumerable<ILoggerItem> _loggers;
+        private readonly IEnumerable<ILoggerEntity> _loggers;
 
-        public IEnumerable<ILoggerItem> GetLoggers() => _loggers;
+        public IEnumerable<ILoggerEntity> GetLoggers() => _loggers;
 
-        public LogCollection(IEnumerable<ILoggerItem> loggers)
+        public LogCollection(IEnumerable<ILoggerEntity> loggers)
         {
             _loggers = loggers;
         }
 
-        private void WriteToLogs(Action<ILoggerItem, string> logAction, string messageTemplate)
+        private void WriteToLogs(Action<ILoggerEntity, string> logAction, string messageTemplate)
         {
             foreach (var logger in _loggers)
                 logAction(logger, messageTemplate);
         }
 
-        private void WriteToLogs(Action<ILoggerItem, string, object[]> logAction, string messageTemplate, params object[] propertyValues)
+        private void WriteToLogs(Action<ILoggerEntity, string, object[]> logAction, string messageTemplate, params object[] propertyValues)
         {
             foreach (var logger in _loggers)
                 logAction(logger, messageTemplate, propertyValues);

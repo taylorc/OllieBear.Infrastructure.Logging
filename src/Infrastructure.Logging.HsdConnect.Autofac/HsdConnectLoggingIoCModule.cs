@@ -20,9 +20,9 @@ namespace Infrastructure.Logging.HsdConnect.Autofac
                     var context = c.Resolve<IComponentContext>();
                     var factory = context.Resolve<IHsdConnectFactory>();
 
-                    return factory.BuildLoggerItem();
+                    return factory.BuildLoggerEntity();
                 })
-                .As<ILoggerItem>()
+                .As<ILoggerEntity>()
                 .SingleInstance();
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Logging
 {
-    public interface ILoggerItem
+    public interface ILoggerEntity
     {
         void Verbose(string message);
 

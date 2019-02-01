@@ -11,7 +11,7 @@ namespace Infrastructure.Logging.HsdConnect.DependencyInjection
 
             services.AddSingleton<IHsdConnectFactory, HsdConnectFactory>();
 
-            services.AddSingleton(typeof(ILoggerItem), s => s.GetService<IHsdConnectFactory>().BuildLoggerItem());
+            services.AddSingleton(typeof(ILoggerEntity), s => s.GetService<IHsdConnectFactory>().BuildLoggerEntity());
 
             return services;
         }

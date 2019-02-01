@@ -2,6 +2,6 @@
 {
     public interface ILogFactory
     {
-        ILoggerItem BuildLoggerItem();
+        ILoggerEntity BuildLoggerEntity();
     }
 }

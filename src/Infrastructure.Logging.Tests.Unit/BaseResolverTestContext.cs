@@ -56,7 +56,7 @@ namespace Infrastructure.Logging.Tests.Unit
             Assert.True(loggers.Count == 2);
         }
 
-        private static ICollection<ILoggerItem> GetLoggersInCollection(ILog logger)
+        private static ICollection<ILoggerEntity> GetLoggersInCollection(ILog logger)
         {
             Assert.IsType<LogCollection>(logger);
 

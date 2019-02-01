@@ -22,7 +22,7 @@ namespace Infrastructure.Logging.Serilog
             _loggerConfiguration = new LoggerConfiguration();
         }
 
-        public ILoggerItem BuildLoggerItem()
+        public ILoggerEntity BuildLoggerEntity()
         {
             if (!Enum.TryParse(_loggingConfigurationOptions.ConsoleMinimumLogLevel, out LogLevel logLevel))
             {

@@ -20,9 +20,9 @@ namespace Infrastructure.Logging.Serilog.Autofac
                     var context = c.Resolve<IComponentContext>();
                     var factory = context.Resolve<ISerilogFactory>();
 
-                    return factory.BuildLoggerItem();
+                    return factory.BuildLoggerEntity();
                 })
-                .As<ILoggerItem>()
+                .As<ILoggerEntity>()
                 .SingleInstance();
         }
     }

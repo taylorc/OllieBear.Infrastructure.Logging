@@ -2,7 +2,7 @@
 
 namespace Infrastructure.Logging.HsdConnect
 {
-    public class HsdConnectLogger : ILoggerItem
+    public class HsdConnectLogger : ILoggerEntity
     {
         private readonly ILogger _logger;
 
