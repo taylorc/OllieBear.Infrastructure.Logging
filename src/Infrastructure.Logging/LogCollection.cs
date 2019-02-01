@@ -7,6 +7,8 @@ namespace Infrastructure.Logging
     {
         private readonly IEnumerable<ILoggerItem> _loggers;
 
+        public IEnumerable<ILoggerItem> GetLoggers() => _loggers;
+
         public LogCollection(IEnumerable<ILoggerItem> loggers)
         {
             _loggers = loggers;
