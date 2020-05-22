@@ -132,7 +132,7 @@ Apply this script to the target database.
 
 ## Enriching a log
 
-### Inject IEnrichALog into the constructor
+### Wrap calls with LogContext using statement
 
 ```C#
   using(LogContext.PushProperty("PropertyName", "PropertyValue")){

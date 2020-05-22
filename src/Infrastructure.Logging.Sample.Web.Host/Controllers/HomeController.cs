@@ -25,7 +25,7 @@ namespace Infrastructure.Logging.Sample.Web.Host.Controllers
         {
             ViewData["Message"] = "Your application description page.";
 
-            return Json(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
 
         public IActionResult Contact()
