@@ -5,6 +5,8 @@ using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Enrichers;
 using Serilog.Formatting.Display;
+using Serilog.Sinks.MSSqlServer;
+using Serilog.Sinks.MSSqlServer.Sinks.MSSqlServer.Options;
 using Serilog.Sinks.RollingFile;
 using System;
 using System.IO;
@@ -34,6 +36,7 @@ namespace Infrastructure.Logging.Serilog
                 .Enrich.With(new MachineNameEnricher())
                 .Enrich.With(new EnvironmentUserNameEnricher())
                 .Enrich.WithProperty("Application", _loggingConfigurationOptions.ApplicationName)
+                .Enrich.FromLogContext()
                 .MinimumLevel.Verbose();
 
             AddConsoleLogger(_loggerConfiguration, logLevel);
@@ -48,7 +51,16 @@ namespace Infrastructure.Logging.Serilog
                     loggileFileConfiguration);
             }
 
+            foreach (var loggingDatabaseConfiguration in _loggingConfigurationOptions.LoggingDatabaseConfigurations ?? new LoggingDatabaseConfiguration[]{ })
+            {
+                 AddMsSqlLogger(
+                    _loggerConfiguration,
+                    _loggingConfigurationOptions.ApplicationName,
+                    loggingDatabaseConfiguration);
+            }
+
             return new SerilogFileLogger(_loggerConfiguration.CreateLogger());
+
         }
 
         private static void AddConsoleLogger(
@@ -58,6 +70,25 @@ namespace Infrastructure.Logging.Serilog
             loggerConfiguration
                 .WriteTo
                 .Console(minimumLoggingLevel.ToLogEventLevel());
+        }
+
+        private static void AddMsSqlLogger(
+            LoggerConfiguration loggerConfiguration,
+            string applicationName,
+            LoggingDatabaseConfiguration databaseConfiguration)
+        {
+            var option = new SinkOptions();
+            option.TableName = "Logs";
+
+
+            if (!Enum.TryParse(databaseConfiguration.MinimumLogLevel, out LogLevel logLevel))
+            {
+                throw new Exception($"Unrecognised log level {databaseConfiguration.MinimumLogLevel}");
+            }
+            
+            loggerConfiguration
+                .WriteTo
+                .Sink(new MSSqlServerSink(databaseConfiguration.ConnectionString, option), logLevel.ToLogEventLevel());
         }
 
         private static void AddRollingFileLogger(

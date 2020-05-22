@@ -7,7 +7,9 @@ Standardised logging infrastructure module for VPRC projects
 ### Autofac
 
 #### Serilog
+
 To load the Serilog logging module via Autofac, add the following module to the ContainerBuilder registration:
+
 ```C#
 var containerBuilder = new ContainerBuilder();
 
@@ -19,7 +21,9 @@ builder.RegisterModule<InfrastructureLoggingIoCModule>();
 ### DependencyInjection
 
 #### Serilog
+
 To load the Serilog logging module via DependencyInjection, add the following to the ServicesCollection registration:
+
 ```C#
 var services = new ServiceCollection();
 
@@ -29,7 +33,9 @@ Services.AddSerilogLogging();
 ```
 
 ## Logging Configuration Options
+
 ### Sample appsettings.json
+
 ```json
 "LoggingConfigurationOptions": {
     "ApplicationName": "Test.Application",
@@ -44,7 +50,9 @@ Services.AddSerilogLogging();
   }
 
 ```
+
 ## Log Levels
+
 Log level must be one of the following:
 
 - Verbose
@@ -55,8 +63,11 @@ Log level must be one of the following:
 - Fatal
 
 Strings other than these entries will throw exceptions.
+
 ## Multiple Files
+
 ### Sample appsettings.json
+
 ```json
 {
   "LoggingConfigurationOptions": {
@@ -80,8 +91,60 @@ Strings other than these entries will throw exceptions.
 }
 ```
 
+## Adding a SQL Sink
+
+### Adding Logging table
+
+The script to add a Logs table is located here: vprc.infrastructure.logging\src\Infrastructure.Logging.Serilog\Script\CREATE_TABLE_LOGS.sql.
+
+Apply this script to the target database.
+
+### Sample appsettings.json with LoggingDatabaseConfigurations
+
+```json
+{
+  "LoggingConfigurationOptions": {
+    "ApplicationName": "Infrastructure.Logging.Sample.Host",
+    "ConsoleMinimumLogLevel": "Debug",
+    "LoggingFileConfigurations": [
+      {
+        "NumberOfFilesRetained": 15,
+        "MinimumLogLevel": "Information",
+        "FilePath": "D:\\Logs\\SpecificFolder1\\"
+      },
+      {
+        "MinimumLogLevel": "Fatal",
+        "FilePath": "D:\\Logs\\SpecificFolder2"
+      },
+      {
+        "NumberOfFilesRetained": 1
+      }
+    ],
+    "LoggingDatabaseConfigurations": [
+      {
+        "MinimumLogLevel": "Information",
+        "ConnectionString": "Data Source=.;Initial Catalog=VPRCSCHEDULE;Integrated Security=true;"
+      }
+    ]
+  }
+}
+```
+
+## Enriching a log
+
+### Wrap calls with LogContext using statement
+
+```C#
+  using(LogContext.PushProperty("PropertyName", "PropertyValue")){
+    //all log calls inside this using statement will be enriched with PropertyName
+    .... more code ....
+  }
+```
+
 ## Disabling default ASP.NET Core console logging
+
 You can disable the other configured logging in your projects by adding the following to your Program / Startup code:
+
 ```C#
 	WebHost.CreateDefaultBuilder(args)
 		...

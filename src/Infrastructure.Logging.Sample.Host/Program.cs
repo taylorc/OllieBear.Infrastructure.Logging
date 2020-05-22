@@ -1,8 +1,6 @@
 ﻿using System.IO;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using Infrastructure.Logging.HsdConnect.Autofac;
-using Infrastructure.Logging.Serilog.Autofac;
+using Infrastructure.Logging.Serilog.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +10,7 @@ namespace Infrastructure.Logging.Sample.Host
     {
         private static void Main(string[] args)
         {
+
             var services = new ServiceCollection();
 
             var configurationBuilder = new ConfigurationBuilder()
@@ -20,26 +19,25 @@ namespace Infrastructure.Logging.Sample.Host
 
             var configuration = configurationBuilder.Build();
 
-            var containerBuilder = new ContainerBuilder();
+
 
             services
                 .Configure<LoggingConfigurationOptions>(configuration.GetSection("LoggingConfigurationOptions"));
 
-            containerBuilder
-                .Populate(services);
+            services.AddSerilogLogging();
 
-            containerBuilder
-                .RegisterModule(new InfrastructureLoggingIoCModule())
-                .RegisterModule(new HsdConnectLoggingIoCModule());
+            services.AddTransient<IJobRun, JobRun>();
+            services.AddTransient<IJobRunTwo, JobRunTwo>();
 
-            containerBuilder.RegisterType<Service>()
-                .AsImplementedInterfaces();
-            
-            var container = containerBuilder.Build();
+            services.AddTransient<IService, Service>();
 
-            var service = container.Resolve<IService>();
-
+            using (ServiceProvider serviceProvider = services.BuildServiceProvider())
+            {
+                var service = serviceProvider.GetService<IService>();
             service.Run();
+            }
+
+
         }
     }
 }
