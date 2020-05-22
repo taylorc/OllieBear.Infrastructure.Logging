@@ -132,13 +132,35 @@ Apply this script to the target database.
 
 ## Enriching a log
 
-### Wrap calls with LogContext using statement
+### Inject a ILogContext
 
 ```C#
-  using(LogContext.PushProperty("PropertyName", "PropertyValue")){
-    //all log calls inside this using statement will be enriched with PropertyName
-    .... more code ....
+  private readonly ILog _logger;
+  private readonly ILogContext _logContext;
+
+  public JobRun(ILog logger, ILogContext logContext)
+  {
+      _logger = logger;
+      _logContext = logContext;
   }
+
+  ... more code ....
+```
+
+### Wrap the \_logger calls in a using statement.
+
+```C#
+// the below will append all _logger calls with a property named JobName with the value of ThisIsAJob
+using (_logContext.PushProperty("JobName", "ThisIsAJob"))
+  {
+      _logger.Verbose("Verbose log entry {0}", i);
+      _logger.Debug("Debug log entry {0}", i);
+      _logger.Info("Info log entry {0}", i);
+      _logger.Warning("Warning log entry {0}", i);
+      _logger.Error("Error log entry {0}", i);
+      _logger.Fatal("Fatal log entry {0}", i);
+  };
+
 ```
 
 ## Disabling default ASP.NET Core console logging

@@ -12,6 +12,7 @@ namespace Infrastructure.Logging.Serilog.DependencyInjection
             services.AddSingleton<ISerilogFactory, SerilogFactory>();
 
             services.AddSingleton(typeof(ILoggerEntity), s => s.GetService<ISerilogFactory>().BuildLoggerEntity());
+            services.AddTransient<ILogContext, SerilogLogContext>();
 
             return services;
         }
