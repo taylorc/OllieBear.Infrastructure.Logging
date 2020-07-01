@@ -122,13 +122,24 @@ Apply this script to the target database.
     ],
     "LoggingDatabaseConfigurations": [
       {
-        "MinimumLogLevel": "Information",
-        "ConnectionString": "Data Source=.;Initial Catalog=VPRCSCHEDULE;Integrated Security=true;"
+        "MinimumLogLevel": "Debug",
+        "ConnectionString": "Data Source=.;Initial Catalog=VPRCSCHEDULE;Integrated Security=true;",
+        "LoggingAdditionalColumns": [
+          // LoggingAdditionalColumns - allows for custom columns in the log table. PLEASE remember to add the colum with correct type and length to the Logs table
+          {
+            "ColumnName": "JobName",
+            "PropertyName": "JobName",
+            "SqlDbType": "NVarChar", // 12 = Nvarchar
+            "DataLength": 150
+          }
+        ]
       }
     ]
   }
 }
 ```
+
+LoggingAdditionalColumns - this wi
 
 ## Enriching a log
 
