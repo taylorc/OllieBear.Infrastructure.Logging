@@ -9,7 +9,10 @@ using Serilog.Sinks.MSSqlServer;
 using Serilog.Sinks.MSSqlServer.Sinks.MSSqlServer.Options;
 using Serilog.Sinks.RollingFile;
 using System;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.IO;
+using System.Linq;
 
 namespace Infrastructure.Logging.Serilog
 {
@@ -79,6 +82,19 @@ namespace Infrastructure.Logging.Serilog
         {
             var option = new SinkOptions();
             option.TableName = "Logs";
+            ColumnOptions columnOptions= null;
+            if(databaseConfiguration.LoggingAdditionalColumns!=null && databaseConfiguration.LoggingAdditionalColumns.Count()>0)
+            {
+                columnOptions = new ColumnOptions();
+                foreach (var item in databaseConfiguration.LoggingAdditionalColumns)
+                {
+                    columnOptions.AdditionalColumns = new Collection<SqlColumn>
+                        {
+                            new SqlColumn
+                                {ColumnName = item.ColumnName, PropertyName = item.PropertyName, DataType = item.SqlDbType, DataLength = item.DataLength},
+                        };
+                }
+            }          
 
 
             if (!Enum.TryParse(databaseConfiguration.MinimumLogLevel, out LogLevel logLevel))
@@ -86,9 +102,19 @@ namespace Infrastructure.Logging.Serilog
                 throw new Exception($"Unrecognised log level {databaseConfiguration.MinimumLogLevel}");
             }
             
-            loggerConfiguration
+            if(columnOptions!=null)
+            {
+                loggerConfiguration
+                .WriteTo
+                .Sink(new MSSqlServerSink(databaseConfiguration.ConnectionString, option, columnOptions: columnOptions), logLevel.ToLogEventLevel());
+            }
+            else
+            {
+                
+                loggerConfiguration
                 .WriteTo
                 .Sink(new MSSqlServerSink(databaseConfiguration.ConnectionString, option), logLevel.ToLogEventLevel());
+            }
         }
 
         private static void AddRollingFileLogger(
