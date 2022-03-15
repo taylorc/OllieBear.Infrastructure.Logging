@@ -19,8 +19,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
           dotnet-version: '6.0.x'
-    - name: Install dependencies
-      run: dotnet restore
+    - name: Install dependencies Logging.Serilog
+      run: dotnet restore .\src\Infrastructure.Logging\Infrastructure.Logging.csproj
+    - name: Install dependencies Logging.Serilog
+      run: dotnet restore .\src\Infrastructure.Logging.Serilog\Infrastructure.Logging.Serilog.csproj
+    - name: Install dependencies Logging.Serilog
+      run: dotnet restore .\src\Infrastructure.Logging.Serilog.DependencyInjection\Infrastructure.Logging.Serilog.DependencyInjection.csproj
+    - name: Install dependencies Logging.Serilog
+      run: dotnet restore .\src\Infrastructure.Logging.Hosting.Extensions\Infrastructure.Logging.Hosting.Extensions.csproj
     - name: Build Logging
       run: dotnet build .\src\Infrastructure.Logging\Infrastructure.Logging.csproj --configuration Release --no-restore
     - name: Build Logging.Serilog
