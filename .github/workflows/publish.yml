@@ -7,7 +7,7 @@ on:
       - 'src/OllieBear.Infrastructure.Logging/**'
 jobs:
   publish:
-    name: list Ardalis.GuardClauses on nuget.org
+    name: list OllieBear.Infrastructure.Logging on nuget.org
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
