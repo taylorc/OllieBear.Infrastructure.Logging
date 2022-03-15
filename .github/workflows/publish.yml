@@ -7,23 +7,20 @@ on:
     paths:
       - 'src/Infrastructure.Logging/**'
 jobs:
-  publish:
+  build:
     name: list OllieBear.Infrastructure.Logging on nuget.org
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-
-      # Required for a specific dotnet version that doesn't come with ubuntu-latest / windows-latest
-      # Visit bit.ly/2synnZl to see the list of SDKs that are pre-installed with ubuntu-latest / windows-latest
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 6.0.x
-      
-      # Publish
-      # https://github.com/brandedoutcast/publish-nuget/issues/76
-      - name: publish on version change
-      - name: Pack OllieBear.Infrastructure.Logging project
-        run: dotnet pack src/Infrastructure.Logging/Infrastructure.Logging.csproj --no-build --configuration Release --include-symbols -p:SymbolPackageFormat=snupkg -o .
-      - name: Publish OllieBear.Infrastructure.Logging package to NuGet
-        run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore Obfuscation.Tasks project dependencies
+      run: dotnet restore src/Infrastructure.Logging/Infrastructure.Logging.csproj
+    - name: Build Obfuscation.Tasks project
+      run: dotnet build src/Infrastructure.Logging/Infrastructure.Logging.csproj --no-restore --configuration Release
+    - name: Pack Obfuscation.Tasks project
+      run: dotnet pack src/Infrastructure.Logging/Infrastructure.Logging.csproj --no-build --configuration Release --include-symbols -p:SymbolPackageFormat=snupkg -o .
+    - name: Publish package to NuGet
+      run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
