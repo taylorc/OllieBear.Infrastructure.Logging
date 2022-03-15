@@ -21,12 +21,9 @@ jobs:
           dotnet-version: 6.0.x
       
       # Publish
+      # https://github.com/brandedoutcast/publish-nuget/issues/76
       - name: publish on version change
-        uses: alirezanet/publish-nuget@v3.0.0
-        with:
-          PROJECT_FILE_PATH: src/Infrastructure.Logging/Infrastructure.Logging.csproj # Relative to repository root
-          # VERSION_FILE_PATH: Directory.Build.props # Filepath with version info, relative to repository root. Defaults to project file
-          VERSION_REGEX: <Version>(.*)<\/Version> # Regex pattern to extract version info in a capturing group
-          TAG_COMMIT: true # Flag to enable / disable git tagging
-          TAG_FORMAT: OllieBear.Infrastructure.Logging-v* # Format of the git tag, [*] gets replaced with version
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}} # nuget.org API key
+      - name: Pack OllieBear.Infrastructure.Logging project
+        run: dotnet pack src/Infrastructure.Logging/Infrastructure.Logging.csproj --no-build --configuration Release --include-symbols -p:SymbolPackageFormat=snupkg -o .
+      - name: Publish OllieBear.Infrastructure.Logging package to NuGet
+        run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
