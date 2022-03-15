@@ -1,22 +1,8 @@
-# vprc-infrastructure-logging
+# olliebear-infrastructure-logging
 
-Standardised logging infrastructure module for VPRC projects
+Standardised logging infrastructure module for olliebear projects
 
 ## Implementations
-
-### Autofac
-
-#### Serilog
-
-To load the Serilog logging module via Autofac, add the following module to the ContainerBuilder registration:
-
-```C#
-var containerBuilder = new ContainerBuilder();
-
-...
-
-builder.RegisterModule<InfrastructureLoggingIoCModule>();
-```
 
 ### DependencyInjection
 
@@ -95,7 +81,7 @@ Strings other than these entries will throw exceptions.
 
 ### Adding Logging table
 
-The script to add a Logs table is located here: vprc.infrastructure.logging\src\Infrastructure.Logging.Serilog\Script\CREATE_TABLE_LOGS.sql.
+The script to add a Logs table is located here: olliebear.infrastructure.logging\src\Infrastructure.Logging.Serilog\Script\CREATE_TABLE_LOGS.sql.
 
 Apply this script to the target database.
 
@@ -123,7 +109,7 @@ Apply this script to the target database.
     "LoggingDatabaseConfigurations": [
       {
         "MinimumLogLevel": "Debug",
-        "ConnectionString": "Data Source=.;Initial Catalog=VPRCSCHEDULE;Integrated Security=true;",
+        "ConnectionString": "Data Source=.;Initial Catalog=olliebearSCHEDULE;Integrated Security=true;",
         "LoggingAdditionalColumns": [
           // LoggingAdditionalColumns - allows for custom columns in the log table. PLEASE remember to add the colum with correct type and length to the Logs table
           {
