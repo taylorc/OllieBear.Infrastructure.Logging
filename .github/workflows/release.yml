@@ -1,3 +1,4 @@
+name: publish OllieBear.Infrastructure.Logging to nuget
 on:
   push:
     tags:
