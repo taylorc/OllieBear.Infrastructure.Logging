@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Infrastructure.Logging.HsdConnect.Autofac;
 using Infrastructure.Logging.Serilog;
 using Infrastructure.Logging.Serilog.Autofac;
 using Xunit;
@@ -42,7 +41,6 @@ namespace Infrastructure.Logging.Tests.Unit
             _context.ArrangeContainerConfiguration();
             _context.ArrangeContainerBuilder();
             _context.ActRegisterSerilogFileLogger();
-            _context.ActRegisterHsdConnectLogger();
             _context.ActBuildServiceProvider();
             _context.AssertIncludesTwoLoggers();
         }
@@ -64,11 +62,6 @@ namespace Infrastructure.Logging.Tests.Unit
             public void ActRegisterSerilogFileLogger()
             {
                 _containerBuilder.RegisterModule<InfrastructureLoggingIoCModule>();
-            }
-
-            public void ActRegisterHsdConnectLogger()
-            {
-                _containerBuilder.RegisterModule<HsdConnectLoggingIoCModule>();
             }
 
             public void ActBuildServiceProvider()

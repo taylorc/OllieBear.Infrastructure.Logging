@@ -28,8 +28,7 @@ namespace Infrastructure.Logging.Sample.Web.Host
             AddInjectedLogging(services, Configuration);
 
             services
-                .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                .AddControllers(options => options.EnableEndpointRouting = false);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

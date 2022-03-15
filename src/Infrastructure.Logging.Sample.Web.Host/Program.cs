@@ -1,30 +1,38 @@
-﻿using System.IO;
+using Infrastructure.Logging;
 using Infrastructure.Logging.Hosting.Extensions;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Infrastructure.Logging.Sample.Web.Host;
+using Infrastructure.Logging.Serilog.DependencyInjection;
+using System.Configuration;
 
-namespace Infrastructure.Logging.Sample.Web.Host
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddRazorPages();
+
+LoggingHelper.AddStructureLogging(builder.Services, builder.Configuration);
+
+builder.WebHost.RerouteDefaultLogging(services =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateWebHostBuilder(args)
-                .Build()
-                .Run();
-        }
+    LoggingHelper.AddStructureLogging(services, builder.Configuration);
+});
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseConfiguration(BuildConfiguration())
-                .UseStartup<Startup>()
-                .RerouteDefaultLogging(s => Startup.AddInjectedLogging(s, BuildConfiguration()));
+var app = builder.Build();
 
-        public static IConfigurationRoot BuildConfiguration() =>
-            new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-    }
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapRazorPages();
+
+app.Run();

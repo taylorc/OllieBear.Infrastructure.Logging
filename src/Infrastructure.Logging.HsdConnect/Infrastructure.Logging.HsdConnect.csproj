@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <PackageId>Vprc.Infrastructure.Logging.HsdConnect</PackageId>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>OllieBear.Infrastructure.Logging.HsdConnect</PackageId>
     <Authors>HSD</Authors>
     <Description>HSD Connect Logging module</Description>
     <Copyright>Copyright © 2019</Copyright>

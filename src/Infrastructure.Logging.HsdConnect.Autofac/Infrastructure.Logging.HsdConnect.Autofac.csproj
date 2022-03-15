@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <PackageId>Vprc.Infrastructure.Logging.HsdConnect.Autofac</PackageId>
+    <TargetFramework>net6.0</TargetFramework>
+    <PackageId>OllieBear.Infrastructure.Logging.HsdConnect.Autofac</PackageId>
     <Authors>HSD</Authors>
     <Description>Logging IoC HSD Connect Autofac module</Description>
     <Copyright>Copyright © 2019</Copyright>
@@ -13,10 +13,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Infrastructure.Logging.HsdConnect\Infrastructure.Logging.HsdConnect.csproj" />
   </ItemGroup>
 
 </Project>

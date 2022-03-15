@@ -1,5 +1,4 @@
-﻿using Infrastructure.Logging.HsdConnect.DependencyInjection;
-using Infrastructure.Logging.Serilog;
+﻿using Infrastructure.Logging.Serilog;
 using Infrastructure.Logging.Serilog.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -38,7 +37,6 @@ namespace Infrastructure.Logging.Tests.Unit
         {
             _context.ArrangeContainerConfiguration();
             _context.ActRegisterSerilogFileLogger();
-            _context.ActRegisterHsdConnectLogger();
             _context.ActBuildServiceProvider();
             _context.AssertIncludesTwoLoggers();
         }
@@ -48,11 +46,6 @@ namespace Infrastructure.Logging.Tests.Unit
             public void ActRegisterSerilogFileLogger()
             {
                 Services.AddSerilogLogging();
-            }
-
-            public void ActRegisterHsdConnectLogger()
-            {
-                Services.AddHsdConnectLogging();
             }
 
             public void ActBuildServiceProvider()

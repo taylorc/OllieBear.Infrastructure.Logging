@@ -7,7 +7,6 @@ using Serilog.Enrichers;
 using Serilog.Formatting.Display;
 using Serilog.Sinks.MSSqlServer;
 using Serilog.Sinks.MSSqlServer.Sinks.MSSqlServer.Options;
-using Serilog.Sinks.RollingFile;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -106,14 +105,16 @@ namespace Infrastructure.Logging.Serilog
             {
                 loggerConfiguration
                 .WriteTo
-                .Sink(new MSSqlServerSink(databaseConfiguration.ConnectionString, option, columnOptions: columnOptions), logLevel.ToLogEventLevel());
+                .MSSqlServer(databaseConfiguration.ConnectionString, option, null, null,
+                    logLevel.ToLogEventLevel(), columnOptions: columnOptions);
             }
             else
             {
                 
                 loggerConfiguration
                 .WriteTo
-                .Sink(new MSSqlServerSink(databaseConfiguration.ConnectionString, option), logLevel.ToLogEventLevel());
+                .MSSqlServer(databaseConfiguration.ConnectionString, option, null, null,
+                    logLevel.ToLogEventLevel());
             }
         }
 
@@ -138,13 +139,17 @@ namespace Infrastructure.Logging.Serilog
 
             loggerConfiguration
                 .WriteTo
-                .Sink(new RollingFileSink(
-                    logFilePath,
-                    new MessageTemplateTextFormatter(fileConfiguration.Format, null),
-                    fileConfiguration.FileSizeLimitBytes,
-                    fileConfiguration.NumberOfFilesRetained,
-                    shared: fileConfiguration.IsMultiProcessShared),
-                    logLevel.ToLogEventLevel());
+                .File(logFilePath, logLevel.ToLogEventLevel(), fileConfiguration.Format,
+                    fileSizeLimitBytes: fileConfiguration.FileSizeLimitBytes,
+                    retainedFileCountLimit: fileConfiguration.NumberOfFilesRetained,
+                    shared: fileConfiguration.IsMultiProcessShared);
+            //.Sink(new RollingFileSink(
+            //    logFilePath,
+            //    new MessageTemplateTextFormatter(fileConfiguration.Format, null),
+            //    fileConfiguration.FileSizeLimitBytes,
+            //    fileConfiguration.NumberOfFilesRetained,
+            //    shared: fileConfiguration.IsMultiProcessShared),
+            //    logLevel.ToLogEventLevel());
 
 
         }
