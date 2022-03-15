@@ -5,7 +5,7 @@
        <PackageId>OllieBear.Infrastructure.Logging</PackageId>
       <Authors>HSD</Authors>
       <Description>Common Logging module</Description>
-      <Copyright>Copyright © 2018</Copyright>	
+      <Copyright>Copyright © 2022</Copyright>	
   </PropertyGroup>
 
   <ItemGroup>
